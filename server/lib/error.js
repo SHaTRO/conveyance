@@ -3,7 +3,7 @@
  */
 
 var log = require('./logging');
-var serverConfig = require('../config/server/base.json');
+var serverConfig = require('./config');
 
 
 var errct = 0;

@@ -2,7 +2,7 @@
   "name": "conveyance",
   "version": "0.2.0",
   "description": "Enhanced Node.js Express Server Framework",
-  "main": "main.js",
+  "main": "server/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "bristol": "^0.3.2",
-    "express": "^4.12.4",
-    "fs-extra": "^0.20.0",
+    "express": "~3.0.0rc3",
+    "fs-extra": "^0.22.1",
     "merge": "^1.2.0"
   }
 }
