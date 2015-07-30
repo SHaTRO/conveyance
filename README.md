@@ -3,7 +3,9 @@ Node.js Express Server Framework
 
 **Current Status**
 
-First round of files to be checked in shortly.
+Server is contained in "server/" directory.
+
+Start it with "node server/main.js"
 
 Version 0.x of this framework is used by cloning/copying then adding your configurations and resources.
 
