@@ -1,0 +1,8 @@
+{
+	"/js" : "resources/js",
+	"/lib" : "resources/lib",
+	"/css" : "resources/css",
+	"/html" : "resources/html",
+	"/img" : "resources/img",
+	"/media" : "resources/media"
+}

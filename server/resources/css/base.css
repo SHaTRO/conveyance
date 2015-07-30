@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+/**
+ * base.css
+ *
+ * Global CSS style sheet.  
+ *
+ */
+ 
+body * {
+	font-family: sans-serif;
+}
