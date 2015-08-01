@@ -1,0 +1,5 @@
+{
+    "name" : "test server",
+    "port" : 4490,
+    "noResourceCopy" : true
+}

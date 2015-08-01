@@ -1,25 +1,18 @@
 # conveyance
 Node.js Express Server Framework
 
-**Current Status**
-
-Server is contained in "server/" directory.
-
-Start it with "node server/main.js"
-
-Version 0.x of this framework is used by cloning/copying then adding your configurations and resources.
-
 REST endpoints should be added as routes.  
 
 
+This is work-in-progress.  
+We will be reworking error handlers, router interface, configuration interface, and providing examples of middleware installation.
+We will also be adding additional functionality.
 
-**Future Direction**
+The goal here is to provide a ready-built, extensible server framework based on Express.  
 
-Version 1.x of this framework will likely go something like this:
-<pre>
-    $ npm install conveyance
-    $ node ./node_modules/conveyance/bin/setup.js
-</pre>
+The framework will be complete with logging, static resource support, error handling, etc.  
 
+Target version 1.0.x will bear the final API contract for version 1.0.   There is NO API CONTRACT for v.0.1.  
 
+See "examples" for current API examples.
 

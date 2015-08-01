@@ -7,11 +7,14 @@ module.exports = function() {
 	
 	var express = require('express');
 	var path = require('path');
+
 	
 	var log = require('./logging');
 	var config = require('./config');
 	var staticRoutes = require('./static');
 	var errorHandlers = require('./error');
+        var routers = require('./routers');
+        var resources = require('./resources');
 	
 	
 	var serverConfig = config.serverConfig();
@@ -19,22 +22,32 @@ module.exports = function() {
 	var app = express();
 	var server;
 	
-	function startServer() {
+	function startServer(cb) {
 		log.debug("Configuring server...");
-		staticRoutes(app, path.join(process.cwd(), 'config/static/base.json'));
+                resources.init();
+		staticRoutes(app, { config : config.staticConfig() });
 		errorHandlers(app);
 		log.debug("Starting server...");
-		server = app.listen(serverConfig.port || 80, serverConfig.host);
-		var addr = server.address();
-		log.info("Conveyance started at " + addr.address + ':' + addr.port);	
-		return app;
+		this.server = server = app.listen(serverConfig.port || 80, serverConfig.host, function() {
+		    var addr = server.address();
+		    log.info("Server (" + serverConfig.name + ") started at " + addr.address + ':' + addr.port);	
+                    if (cb) cb();
+                });
 	}
+
+        function stopServer(cb) {
+            server.close(function() {
+                log.info("Server (" + serverConfig.name + ") stopped.");
+                if (cb) cb();
+            });
+        }
 	
 	return {
 		app : app,
 		server : server,
 		config : serverConfig,
-		start : startServer
+		start : startServer,
+                stop : stopServer
 	};
 
 }();

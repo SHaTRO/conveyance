@@ -1,0 +1,6 @@
+{
+  "reporting" : {
+    "dir" : "tests/coverage",
+    "reports" : [ "lcov", "html" ]
+  }
+}
