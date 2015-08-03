@@ -45,9 +45,12 @@ module.exports = function() {
 	return {
 		app : app,
 		server : server,
+                routers : routers,
+
 		config : serverConfig,
 		start : startServer,
-                stop : stopServer
+                stop : stopServer,
+
 	};
 
 }();
