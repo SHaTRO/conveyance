@@ -11,7 +11,7 @@ module.exports = function() {
     }
 
     function addRouters(app) {
-        var paths = routes.getOwnPropertyNames();
+        var paths = Object.keys(routes);
         paths.sort(function(a,b) { return b.localeCompare(a); }).forEach(function(rpath) {
             var routers = routes[rpath];
             routers.forEach(function(route) {
