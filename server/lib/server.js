@@ -26,6 +26,7 @@ module.exports = function() {
 		log.debug("Configuring server...");
                 resources.init();
 		staticRoutes(app, { config : config.staticConfig() });
+                routers.addRoutes(app);
 		errorHandlers(app);
 		log.debug("Starting server...");
 		this.server = server = app.listen(serverConfig.port || 80, serverConfig.host, function() {
