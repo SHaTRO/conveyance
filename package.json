@@ -3,7 +3,7 @@
   "version": "0.3.3",
   "description": "Enhanced Node.js Express Server Framework",
   "author": "Steven D. Harris <sharris@aetrix.com>",
-  "license": "ISC",
+  "license": "MIT",
   "repository" : {
     "type" : "git",
     "url" :  "https://github.com/SHaTRO/conveyance.git"
