@@ -1,4 +1,7 @@
 
+v0.3.4 - 2015-08-07
+  + Improved documentation, fixed license code for NPM
+
 v0.3.3 - 2015-08-03
   + Initialized routes in server.js
 
