@@ -1,3 +1,9 @@
+v0.4.1 - 2015-09-11
+  + Added support for application specific configuration
+  + Added support for environment variable to set custom configuration directory
+  + Added new error object for error support
+  + Added "reset" capability to start/stop and reset the server
+  + Updated to use express v4.x
 
 v0.3.4 - 2015-08-07
   + Improved documentation, fixed license code for NPM
