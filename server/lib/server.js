@@ -3,25 +3,22 @@
  * Server startup utility.
  */
 
-module.exports = function() {
-	
-	var express = require('express');
-	var path = require('path');
+var express = require('express');
+var path = require('path');
 
-	
+module.exports = function(optionalCustomDir) {
+
 	var log = require('./logging');
-	var config = require('./config');
-	var staticRoutes = require('./static');
-	var errorHandlers = require('./error');
+
+        var config = require('./config');
+
         var routers = require('./routers');
         var resources = require('./resources');
-	
-	
-	var serverConfig = config.serverConfig();
-	
-	var app = express();
-	var server;
-	
+	var staticRoutes = require('./static');
+	var errorHandlers = require('./error');
+
+        var serverConfig, app, server;
+    
 	function startServer(cb) {
 		log.debug("Configuring server...");
                 resources.init();
@@ -39,19 +36,33 @@ module.exports = function() {
         function stopServer(cb) {
             server.close(function() {
                 log.info("Server (" + serverConfig.name + ") stopped.");
+                this.server = server = false;
                 if (cb) cb();
             });
         }
-	
-	return {
+
+
+        function init() {
+            if (server) {
+                log.error("Can't init() when already initialized, must stop the server");
+                throw new Error("Can't init() when already initialized, must stop the server");
+            }
+            config.reset();
+	    serverConfig = config.serverConfig();
+            appConfig = config.appConfig();
+	    app = express();
+            return {
 		app : app,
 		server : server,
                 routers : routers,
-
-		config : serverConfig,
+		appConfig : appConfig,
+                config : serverConfig,
 		start : startServer,
                 stop : stopServer,
-
-	};
-
+                reset : init
+            };
+        }
+	
+	return init();
 }();
+
