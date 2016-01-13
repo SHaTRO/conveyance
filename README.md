@@ -26,6 +26,10 @@ Just create a resources directory in your working directory.  The following sub-
 
 Note that these are fairly universal conventions and will currently always be loaded as static resource routes.  If you add additional directories, you will need to create a path mapping in your own JSON file(s) in "config/static/" rooted in the server startup working directory.
 
+## Favicon
+
+The favicon.ico support is provided using the "serve-favicon" NPM module.  To set up your own, override the server config for "favicon".  Set it to false if you want to disable favicon.ico support.
+
 ## Routers
 Your application activities should be registered as "routers" using the latest Express.Router() object.  Once you have a router defined, register it with conveyance (conveyance.routers.register(path, router)) and it should work. Best practice is that REST endpoints should be added as routers with proper path specification.
 
@@ -33,7 +37,7 @@ Your application activities should be registered as "routers" using the latest E
 ## Version 0.x Caveats
 The framework is version 0.x because the designs for things may change.  We will be reworking error handlers, router interface, configuration interface, and providing examples of middleware installation.  We will also be adding additional functionality.
 
-Target version 1.0.x will bear the final API contract for version 1.0.   There is NO OFFICE API CONTRACT for v.0.x
+Target version 1.0.x will bear the final API contract for version 1.0.   There is NO OFFICIAL API CONTRACT for v.0.x
 
 See "examples" for current API examples.
 

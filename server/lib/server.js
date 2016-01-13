@@ -4,6 +4,8 @@
  */
 
 var express = require('express');
+var favicon = require('serve-favicon');
+
 var path = require('path');
 
 module.exports = function(optionalCustomDir) {
@@ -51,6 +53,10 @@ module.exports = function(optionalCustomDir) {
 	    serverConfig = config.serverConfig();
             appConfig = config.appConfig();
 	    app = express();
+
+            // add favicon if it wasn't overridden to be false
+            if (serverConfig.favicon) app.use(favicon(serverConfig.favicon));
+
             return {
 		app : app,
 		server : server,
