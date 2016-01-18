@@ -1,3 +1,6 @@
+v0.4.4 - 2016-01-17
+  + Brought dependencies up to date.
+
 v0.4.3 - 2016-01-17
   + Reduced stack size for 40x errors.  401 and 404 reduced completely,
     others reduced to two lines of stack only.
