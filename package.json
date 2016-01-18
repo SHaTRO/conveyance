@@ -1,6 +1,6 @@
 {
   "name": "conveyance",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Enhanced Node.js Express Server Framework",
   "author": "Steven D. Harris <sharris@aetrix.com>",
   "license": "MIT",

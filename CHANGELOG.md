@@ -1,3 +1,7 @@
+v0.4.3 - 2016-01-17
+  + Reduced stack size for 40x errors.  401 and 404 reduced completely,
+    others reduced to two lines of stack only.
+    
 v0.4.2 - 2016-01-12
   + Added favicon support, override 'favicon' server config to redefine
 
