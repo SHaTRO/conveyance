@@ -1,3 +1,6 @@
+v0.4.2 - 2016-01-12
+  + Added favicon support, override 'favicon' server config to redefine
+
 v0.4.1 - 2015-09-11
   + Added support for application specific configuration
   + Added support for environment variable to set custom configuration directory
