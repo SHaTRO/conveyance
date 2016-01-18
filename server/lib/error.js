@@ -5,6 +5,8 @@
 var log = require('./logging');
 var serverConfig = require('./config');
 
+var noStack = [ 402, 404 ];
+var shortStack = [ 401, 403, 407, 408 ];
 
 var errct = 0;
 
@@ -14,12 +16,23 @@ function defaultRequestHandler(req, res, next) {
 	next(err);
 }
 
+function clippedStack(stack, lines) {
+    if (!lines) lines=1;
+    var clipped = stack.split && stack.split("\n").splice(0,lines);
+    return clipped.join("\n");
+}
 
 function logErrors(err, req, res, next) {
 	++errct;
 	if (err.status) {
-		log.error(err.status + ' ERROR #' + errct);
-		log.error(err.stack);
+		if (noStack.indexOf(err.status)>-1) {
+			log.error(err.status + ' ' + clippedStack(err.stack));
+		} else if (shortStack.indexOf(err.status)>-1) {
+			log.error(err.status + ' ' + clippedStack(err.stack, 3));
+		} else {
+			log.error(err.status + ' ERROR #' + errct);
+			log.error(err.stack);	
+		}
 	} else {
 		log.error('UNHANDLED ERROR #'+errct);
 		log.error(err.stack);
@@ -44,7 +57,7 @@ function apiErrorResponse(err, req, res, next) {
 					code : 500
 				};
 		var msg = JSON.stringify(errorMsg);
-		res.status(500)
+		res.status(errorMsg.code)
 		   .type('json')
 		   .send(msg);
 	} else {
