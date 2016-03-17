@@ -21,7 +21,7 @@ module.exports = function() {
         } else {
             if (!config.serverConfig().noResourceCopy) {
                 log.debug("Copying resources from " + coreDir + " to " + baseDir);
-                fs.copy(coreDir, baseDir, { clobber: config.serverConfig().forceResourceCopy }, function(err) {
+                fs.copy(coreDir, baseDir, { clobber: config.serverConfig().forceResourceCopy ? true : false }, function(err) {
                     if (err) log.error(err.stack);
                     log.info("Resource copy complete.");
                 });            

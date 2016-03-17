@@ -2,5 +2,5 @@
 	"name" 		: "conveyance",
 	"port" 		: 4480,
 	"apiRoute" 	: "/api/v1",
-        "favicon"       : "server/resources/img/favicon.png"
+        "favicon"       : true
 }

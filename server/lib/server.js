@@ -4,7 +4,6 @@
  */
 
 var express = require('express');
-var favicon = require('serve-favicon');
 
 var path = require('path');
 
@@ -18,6 +17,8 @@ module.exports = function(optionalCustomDir) {
         var resources = require('./resources');
 	var staticRoutes = require('./static');
 	var errorHandlers = require('./error');
+
+        var favicon = require('./favicon');
 
         var serverConfig, app, server;
     
