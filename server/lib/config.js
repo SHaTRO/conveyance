@@ -10,31 +10,29 @@
 var fs = require('fs-extra');
 var path = require('path');
 var glob = require('glob');
-var merge = require('merge');
-var log = require('./logging');
 
+// we use log.baselog because we the server log hasn't been configured yet
+var log = require('./logging').baselog;
 
-function mergeConfig(dest,src) { 
-    merge.recursive(dest, src);
-}
+var mergeConfig = require('lodash').merge;
 
 // initializing, so sync is OK
 function baseConfig(key) {
     var baseConfDir = path.join(path.dirname(__filename), '..', 'config', key);
     var baseConfFile = path.join(baseConfDir, 'base.json');
-    log.debug('Initializing ' + key + ' configuration from ' + baseConfFile);
+    log.info('Initializing ' + key + ' configuration from ' + baseConfFile);
     return fs.readJsonSync(baseConfFile);
 }
 
 function customConfig(key, customDir) {
     var resultConf = {};
     var customConfDir = path.join(customDir || process.cwd(), 'config', key);
-    log.debug("Looking for custom configuration files in: " + customConfDir);
+    log.info("Looking for custom configuration files in: " + customConfDir);
     var files = glob.sync('**/*.json', { 'cwd' : customConfDir });
     if (files && files.length) {
         files.map(function(fname) { return path.join(customConfDir, fname) })
             .forEach(function(jsonfile) {
-                log.debug("Merging custom configuration: " + jsonfile);
+                log.info("Merging custom configuration: " + jsonfile);
                 var customConf = fs.readJsonSync(jsonfile);
                 if (customConf) {
                     mergeConfig(resultConf, customConf);
@@ -48,7 +46,8 @@ function customConfig(key, customDir) {
 
 module.exports = function(optionalCustomDir) {
 
-    var serverConf;
+    var loggingConf;
+	var serverConf;
     var staticConf;
     var appConf;
 
@@ -73,14 +72,23 @@ module.exports = function(optionalCustomDir) {
 
     function appConfig() {
         if (!appConf) {
-            appConf = appConf || baseConfig('app');
+            appConf = baseConfig('app');
             var customConf = customConfig('app', optionalCustomDir);
             mergeConfig(appConf, customConf);
         }
         return appConf;
     }
 
+    function loggingConfig() {
+    	if (!loggingConf) {
+    		loggingConf = baseConfig('logging');
+    		var customConf = customConfig('logging', optionalCustomDir);
+    		mergeConfig(loggingConf, customConf);
+    	}
+    	return loggingConf;
+    }
 
+    // we don't/can't reset logging - why?  Because bristol can't be "undone"
     function resetConfig() {
         serverConf = false;
         staticConf = false;
@@ -90,6 +98,7 @@ module.exports = function(optionalCustomDir) {
 
     return {
         // API methods (contract)
+    	loggingConfig : loggingConfig,
         serverConfig : serverConfig,
         staticConfig : staticConfig,
         appConfig : appConfig,

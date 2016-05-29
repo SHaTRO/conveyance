@@ -1,0 +1,7 @@
+{
+    "targets" : {
+        "name" : "console",
+        "formatter" : "human",
+        "lowestSeverity" : "info"
+    }
+}
