@@ -1,3 +1,8 @@
+
+v0.5.1 - 2016-05-28
+  + Revised logging to be configurable, only using base log when bootstrapping config
+  + Changed from "merge" to "lodash" for merging
+  
 v0.4.4 - 2016-01-17
   + Brought dependencies up to date.
 
