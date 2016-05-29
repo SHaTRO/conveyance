@@ -1,9 +1,2 @@
 {
-    "logging" : {
-        "target" : {
-            "name" : "console"
-        },
-        "formatter" : "human",
-        "lowestSeverity" : "info"
-    }
 }
